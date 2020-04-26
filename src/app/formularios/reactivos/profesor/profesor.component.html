@@ -1,0 +1,51 @@
+<h1>Profesor</h1>
+
+<!-- Registramos el FormControl creado en la vista -->
+<label>Nombre
+    <input type="text" [formControl]="nombreControl">
+</label>
+
+<button type="text" (click)="setNombre()">Actualizar Nombre</button>
+
+<!-- Una de las formas de poder ver el valor del FormControl es a través de la interpolación: -->
+Nombre Interpolado: {{nombreControl.value}}
+
+
+<form [formGroup]='profesorForm' (ngSubmit)=submit()>
+    <label>Nombre
+        <input type="text" formControlName="nombre">
+    </label>
+    <label>Apellido
+        <input type="text" formControlName="apellido">
+    </label>
+    <label>Edad
+        <input type="text" formControlName="edad">
+    </label>
+    <div formGroupName="direccion">
+        <h3>Direccion</h3>
+        <label>Calle
+            <input type="text" formControlName="calle">
+        </label>
+        <label>Número
+            <input type="text" formControlName="numero">
+        </label>
+    </div>
+    <div formArrayName= "telefonos">
+        <h3>Teléfonos</h3>
+        <button (click)="agregarTelefono()">Agregar Teléfono</button>
+        
+        <div *ngFor="let telefono of telefonos.controls; let i = index">
+            <label>
+                Teléfono <input type="text" [formControlName]="i">
+            </label>
+
+        </div>
+    </div>
+
+
+
+
+Status Formularios: {{profesorForm.status}}
+
+    <button type="submit">Guardar</button>
+</form> 
